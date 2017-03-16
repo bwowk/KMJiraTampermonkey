@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Agile Board
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.1
+// @version      0.2
 // @description  Show DoD/DoR checklists
 // @author       bwowk
 // @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/master/DorsDods.js
