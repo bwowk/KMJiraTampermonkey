@@ -12,6 +12,7 @@
 checkExist = setInterval(function() {
     if (AJS.$('.ghx-issue').length) {
         replaceWorkflowTransition();
+        $("span.ghx-type[title='Incident'] img").attr('src','http://emojis.slackmojis.com/emojis/images/1481054971/1409/partywizard.gif?1481054971');
         clearInterval(checkExist);
     }
 }, 100); // check every 100ms
