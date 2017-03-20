@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Agile Board
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.4
+// @version      0.6
 // @description  Jira Agile board improvements
 // @author       bwowk
 // @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/master/DorsDods.js
@@ -12,20 +12,22 @@
 checkExist = setInterval(function() {
     if (AJS.$('.ghx-issue').length) {
         replaceWorkflowTransition();
-        cardOverrides();
+        postRenderOverrides();
+        replaceRenderUI();
         clearInterval(checkExist);
     }
 }, 100); // check every 100ms
 
-function cardOverrides() {
+function postRenderOverrides() {
+    //Gandalf
     $("span.ghx-type[title='Incident'] img").attr('src','http://emojis.slackmojis.com/emojis/images/1481054971/1409/partywizard.gif?1481054971');
 }
 
-function replaceApplyChanges() {
-    oldApply = GH.WorkController.applyLoadedData;
-    GH.WorkController.applyLoadedData = function() {
-        oldApply();
-        cardOverrides();
+function replaceRenderUI() {
+    oldRenderUI = GH.WorkController.renderUI;
+    GH.WorkController.renderUI = function() {
+        oldRenderUI();
+        postRenderOverrides();
     };
 }
 
@@ -80,5 +82,5 @@ function replaceWorkflowTransition() {
                 };
         }
     };
-    console.log('replaced');
+    console.log('Vistakon Jira Board Improvements enabled');
 }
