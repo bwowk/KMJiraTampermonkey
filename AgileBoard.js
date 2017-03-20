@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Agile Board
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.6
+// @version      0.7
 // @description  Jira Agile board improvements
 // @author       bwowk
 // @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/master/DorsDods.js
@@ -9,8 +9,35 @@
 // @grant        none
 // ==/UserScript==
 
+AJS.$('head').append(
+    "<style>" +
+    ".rainbow {" +
+    "animation: colorchange 1s infinite; /* animation-name followed by duration in seconds*/" +
+    "/* you could also use milliseconds (ms) or something like 2.5s */" +
+    "-webkit-animation: colorchange 1s infinite; /* Chrome and Safari */" +
+    "}" +
+    "" +
+    "@keyframes colorchange" +
+    "{" +
+    "0%   {background: red;}" +
+    "25%  {background: yellow;}" +
+    "50%  {background: blue;}" +
+    "75%  {background: green;}" +
+    "100% {background: red;}" +
+    "}" +
+    "" +
+    "@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */" +
+    "{" +
+    "0%   {background: red;}" +
+    "25%  {background: yellow;}" +
+    "50%  {background: blue;}" +
+    "75%  {background: green;}" +
+    "100% {background: red;}" +
+    "});" +
+    "</style>");
+
 checkExist = setInterval(function() {
-    if (AJS.$('.ghx-issue').length) {
+    if ($('.ghx-issue').length) {
         replaceWorkflowTransition();
         postRenderOverrides();
         replaceRenderUI();
@@ -19,8 +46,10 @@ checkExist = setInterval(function() {
 }, 100); // check every 100ms
 
 function postRenderOverrides() {
+    $incidentCards = AJS.$("span.ghx-type[title='Incident'").parent().parent().parent();
     //Gandalf
-    $("span.ghx-type[title='Incident'] img").attr('src','http://emojis.slackmojis.com/emojis/images/1481054971/1409/partywizard.gif?1481054971');
+    $incidentCards.find('.ghx-type img').attr('src','http://emojis.slackmojis.com/emojis/images/1481054971/1409/partywizard.gif?1481054971');
+    $incidentCards.find('.ghx-grabber').addClass('rainbow');
 }
 
 function replaceRenderUI() {
@@ -35,11 +64,11 @@ function replaceWorkflowTransition() {
     oldWorkflowTransition = GH.WorkDragAndDrop.executeWorkflowTransition;
     GH.WorkDragAndDrop.executeWorkflowTransition = function(a,b,destinationStatus){
         switch(destinationStatus) {
-//            case 10020: //-> Analysing
-//                if(confirm('fez isso tudo?\nDoD:\n1.bla\n2.bla\n3.bla')) {
-//                    oldWorkflowTransition(a,b,destinationStatus);
-//                }
-//                break;
+                //            case 10020: //-> Analysing
+                //                if(confirm('fez isso tudo?\nDoD:\n1.bla\n2.bla\n3.bla')) {
+                //                    oldWorkflowTransition(a,b,destinationStatus);
+                //                }
+                //                break;
             case 3: //-> In Progress
                 if(confirmDod(dodAnalysing)) {
                     oldWorkflowTransition(a,b,destinationStatus);
@@ -65,11 +94,11 @@ function replaceWorkflowTransition() {
                     oldWorkflowTransition(a,b,destinationStatus);
                 }
                 break;
-//            case 10043: //-> MTP
-//               if() {
-//                    oldWorkflowTransition(a,b,destinationStatus);
-//                }
-//                break;
+                //            case 10043: //-> MTP
+                //               if() {
+                //                    oldWorkflowTransition(a,b,destinationStatus);
+                //                }
+                //                break;
             case 5: //-> Resolve
                 if(confirmDod(dodMtp)) {
                     oldWorkflowTransition(a,b,destinationStatus);
@@ -82,5 +111,5 @@ function replaceWorkflowTransition() {
                 };
         }
     };
-    console.log('Vistakon Jira Board Improvements enabled');
+    console.log('replaced');
 }
