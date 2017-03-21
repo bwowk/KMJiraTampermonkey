@@ -2,6 +2,10 @@ confirmDod = function(dod) {
   return confirm("Did you fulfill the DoD?\n"+dod);
 };
 
+confirmDor = function(dor) {
+  return confirm("Is the task ready?\n"+dor);
+};
+
 dodAnalysing = "Analysing:\n\
 1. Final assets were delivered and are in the task.\n\
 2. Due dates were agreed and are present in the task.\n\
