@@ -6,11 +6,13 @@ confirmDor = function(dor) {
   return confirm("Is the task ready?\n"+dor);
 };
 
-dodAnalysing = "Analysing:\n\
+dorAnalysing = "Analysing:\n\
 1. Final assets were delivered and are in the task.\n\
-2. Due dates were agreed and are present in the task.\n\
-3. The task was estimated.\n\
-4. CPs were counted during the analysis.";
+2. Due dates were agreed and are present in the task.";
+
+dodAnalysing = "Analysing:\n\
+1. The task was estimated.\n\
+2. CPs were counted during the analysis.";
 
 dodInProgress = "In Progress:\n\
 1. MTS/MTP documentation was written.\n\
