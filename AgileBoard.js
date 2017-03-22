@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Agile Board
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.7
+// @version      0.8
 // @description  Jira Agile board improvements
 // @author       bwowk
-// @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/master/DorsDods.js
+// @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/66503f86f2293c0ac3201d7c1783c4373865ec1d/DorsDods.js
 // @match        https://jiracloud.cit.com.br/secure/RapidBoard.jspa?rapidView=27878*
 // @grant        none
 // ==/UserScript==
@@ -47,7 +47,6 @@ checkExist = setInterval(function() {
 
 function postRenderOverrides() {
     $incidentCards = AJS.$("span.ghx-type[title='Incident'").parent().parent().parent();
-    //Gandalf
     $incidentCards.find('.ghx-type img').attr('src','http://emojis.slackmojis.com/emojis/images/1481054971/1409/partywizard.gif?1481054971');
     $incidentCards.find('.ghx-grabber').addClass('rainbow');
 }
@@ -64,11 +63,11 @@ function replaceWorkflowTransition() {
     oldWorkflowTransition = GH.WorkDragAndDrop.executeWorkflowTransition;
     GH.WorkDragAndDrop.executeWorkflowTransition = function(a,b,destinationStatus){
         switch(destinationStatus) {
-                //            case 10020: //-> Analysing
-                //                if(confirm('fez isso tudo?\nDoD:\n1.bla\n2.bla\n3.bla')) {
-                //                    oldWorkflowTransition(a,b,destinationStatus);
-                //                }
-                //                break;
+            case 10041: //-> Analysing
+                if(confirmDor(dorAnalysing)) {
+                    oldWorkflowTransition(a,b,destinationStatus);
+                }
+                break;
             case 3: //-> In Progress
                 if(confirmDod(dodAnalysing)) {
                     oldWorkflowTransition(a,b,destinationStatus);
@@ -94,11 +93,11 @@ function replaceWorkflowTransition() {
                     oldWorkflowTransition(a,b,destinationStatus);
                 }
                 break;
-                //            case 10043: //-> MTP
-                //               if() {
-                //                    oldWorkflowTransition(a,b,destinationStatus);
-                //                }
-                //                break;
+            case 10043: //-> MTP
+                if(confirmDod(dodUat)) {
+                    oldWorkflowTransition(a,b,destinationStatus);
+                }
+                break;
             case 5: //-> Resolve
                 if(confirmDod(dodMtp)) {
                     oldWorkflowTransition(a,b,destinationStatus);
