@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Issue Status Transition Buttons
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.3
+// @version      0.5
 // @description  Show DoD/DoR checklists
 // @author       bwowk
-// @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/master/DorsDods.js
+// @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/66503f86f2293c0ac3201d7c1783c4373865ec1d/DorsDods.js
 // @match        https://jiracloud.cit.com.br/browse/PODV-*
 // @grant        none
 // ==/UserScript==
@@ -17,6 +17,10 @@
     const PARENT_ISSUE_TYPES = ['Improvement','Content Change','Story','Legacy Bug','Bug','Incident','Service Request', 'Env and SCM'];
     var currentIssueType = $('#type-val').text().trim();
     if ($.inArray(currentIssueType,PARENT_ISSUE_TYPES) != -1) {
+        //Analysing
+        $analysing = $('.issueaction-workflow-transition:contains("Analysing"), .issueaction-workflow-transition:contains("Reanalysing")');
+        $analysing.click(function(evt) {if(!confirmDor(dorAnalysing)) { evt.stopPropagation(); evt.preventDefault(); }});
+        $analysing.append('✔');
         //In Progress
         $('.issueaction-workflow-transition:contains("In Progress")').click(function(evt) {if(!confirmDod(dodAnalysing)) { evt.stopPropagation(); evt.preventDefault(); }});
         $('.issueaction-workflow-transition:contains("In Progress")').append('✔');
