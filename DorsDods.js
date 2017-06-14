@@ -11,7 +11,7 @@ dorAnalysing = "Analysing:\n\
 2. Due dates were agreed and are present in the task.";
 
 dodAnalysing = "Analysing:\n\
-1. The task was estimated.\n\;
+1. The task was estimated.;
 
 dodInProgress = "In Progress:\n\
 1. MTS/MTP documentation was written.\n\
@@ -27,7 +27,7 @@ dodTest = "Test:\n\
 1. Build backend and Build Drupal were generated before testing.\n\
 2. Test Cases were written and reviewed by another tester.\n\
 3. All supported devices and browser were tested.\n\
-4. The tests were ran in all components that were changed.";
+4. The tests were ran in all components that were changed.\n\
 5. CPs were counted during the analysis.";
 
 dodMts = "MTS:\n\
