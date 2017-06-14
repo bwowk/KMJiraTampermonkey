@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Agile Board
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.8
+// @version      0.9
 // @description  Jira Agile board improvements
 // @author       bwowk
 // @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/66503f86f2293c0ac3201d7c1783c4373865ec1d/DorsDods.js
