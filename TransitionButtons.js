@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Vistakon Jira DoD/DoR Issue Status Transition Buttons
 // @namespace    https://jiracloud.cit.com.br
-// @version      0.5
+// @version      1.0
 // @description  Show DoD/DoR checklists
 // @author       bwowk
-// @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/66503f86f2293c0ac3201d7c1783c4373865ec1d/DorsDods.js
+// @require      https://raw.githubusercontent.com/bwowk/vistakonJiraDorDod/master/DorsDods.js
 // @match        https://jiracloud.cit.com.br/browse/PODV-*
 // @grant        none
 // ==/UserScript==
