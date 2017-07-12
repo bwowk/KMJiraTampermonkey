@@ -11,7 +11,7 @@ dorAnalysing = "Analysing:\n\
 2. Due dates were agreed and are present in the task.";
 
 dodAnalysing = "Analysing:\n\
-1. The task was estimated.;
+1. The task was estimated.";
 
 dodInProgress = "In Progress:\n\
 1. MTS/MTP documentation was written.\n\
